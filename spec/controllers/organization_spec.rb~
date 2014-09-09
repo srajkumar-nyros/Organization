@@ -1,0 +1,24 @@
+require "rails_helper"
+
+RSpec.describe OrganizationsController, :type => :controller do
+  describe "GET #index" do
+    it "responds successfully with an HTTP 200 status code" do
+      get :index
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+    end
+
+    it "renders the index template" do
+      get :index
+      expect(response).to render_template("index")
+    end
+
+    it "loads all of the posts into @organizations" do
+      organization1, organization2 = Organization.create!(name: "Lindeman"), Organization.create!(name: "Chelimsky")
+      get :index
+
+      expect(assigns(:organizations)).to match_array([organization1, organization2])
+    end
+  end
+end
+

@@ -1,0 +1,53 @@
+<%= form_for @skill, :html => { :class => "form-horizontal skill" } do |f| %>
+  <div class="field">
+    <%= label_tag :organization %><br>
+    <% if !@skil.nil? %>
+    <%= select_tag :orgid, options_from_collection_for_select(Organization.all, "id", "name", @skil.group.organization.id), :class => "form-control" %>
+    <% else %>
+    <%= select_tag :orgid, options_from_collection_for_select(Organization.all, "id", "name"), :class => "form-control" %>
+    <% end %>
+  </div>
+  <script>
+  $(function(){
+    $("#orgid").change(function(){
+       var value=$(this).val();
+       $.ajax({
+        url: "/s_group_list?orgid="+value,
+        type: "POST",
+        success: function(data) {
+        $("#group_list").html(data);
+		}
+        });
+    });
+  });
+  </script>
+  <div class="field">
+    <%= f.label :group %><br>
+    <div id="group_list">
+    <%= f.collection_select :group_id, @sgroups, :id, :name, {}, {:class => "form-control"} %></div>
+  </div>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <% if @skill.errors.any? %>
+    <% @skill.errors.full_messages.each do |message| %>
+        <% if message=~ /Name.*/ %>
+        <p style="color:red;"><%= message %></p>
+        <% end %>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+  </div>
+  <br/>
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            skills_path, :class => 'btn btn-default' %>
+
+<% end %>

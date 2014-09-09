@@ -1,0 +1,11 @@
+require "rails_helper"
+
+RSpec.describe Organization, :type => :model do
+  it "orders by  name" do
+    lindeman = Organization.create!(name: "Lindeman")
+    chelimsky = Organization.create!(name: "Chelimsky")
+
+    expect(Organization.order('name DESC').to_a).to eq([chelimsky,lindeman])
+
+  end
+end

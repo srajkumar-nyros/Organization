@@ -1,0 +1,31 @@
+<%= form_for @organization, :html => { :class => "form-horizontal organization" } do |f| %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <% if @organization.errors.any? %>
+    <% @organization.errors.full_messages.each do |message| %>
+        <% if message=~ /Name.*/ %>
+        <p style="color:red;"><%= message %></p>
+        <% end %>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :city, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :city, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+  </div>
+  <br />
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            organizations_path, :class => 'btn btn-default' %>
+<% end %>

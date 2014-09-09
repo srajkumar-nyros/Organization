@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body style="width:100%;">
+
+
+<%= nav_bar :brand => image_tag('logo.png', style: "max-width:50px;max-height:40px;margin-top:-22%; " ), :responsive => true do %>
+    <%= menu_group do %>
+        <%= drop_down 'Organization' do %>
+            <%= nav_link 'View Organization', organizations_path  %>
+			<%= nav_link 'New Organization', new_organization_path %>
+		<% end %>
+		<%= drop_down 'Group' do %>
+            <%= nav_link 'View Group', groups_path %>
+			<%= nav_link 'New Group', new_group_path %>
+		<% end %>
+		<%= drop_down 'People' do %>
+            <%= nav_link 'View People', people_path %>
+			<%= nav_link 'New People', new_person_path %>
+		<% end %>
+		<%= drop_down 'Skill' do %>
+            <%= nav_link 'View Skill', skills_path %>
+			<%= nav_link 'New Skill', new_skill_path %>
+		<% end %>
+    <% end %>
+<% end %>
+
+<div style="width:83%;margin:0 auto;">
+<%= yield %>
+</div>
+</body>
+</html>

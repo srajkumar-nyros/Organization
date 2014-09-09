@@ -1,0 +1,70 @@
+<%= form_for @person, :html => { :class => "form-horizontal person" } do |f| %>
+  
+  <div class="field">
+    <%= label_tag :organization %><br>
+    <% if !@prn.nil? %>
+    <%= select_tag :orgid, options_from_collection_for_select(Organization.all, "id", "name", @prn.group.organization.id), :class => 'form-control' %>
+    <% else %>
+    <%= select_tag :orgid, options_from_collection_for_select(Organization.all, "id", "name"), :class => 'form-control' %>
+    <% end %>
+  </div>
+  <script>
+  $(function(){
+    $("#orgid").change(function(){
+       var value=$(this).val();
+       $.ajax({
+        url: "/group_list?orgid="+value,
+        type: "POST",
+        success: function(data) {
+        $("#group_list").html(data);
+		value=$("#person_group_id").val();
+		$.ajax({
+        url: "/skill_list?groupid="+value,
+        type: "POST",
+        success: function(data) {
+        $("#skill_list").html(data);
+		}
+        });
+		}
+        });
+    });
+  });
+  </script>
+  <div class="field">
+    <%= f.label :group %><br>
+    <div id="group_list">
+    <%= f.collection_select :group_id, @groups, :id, :name, {}, {:class => 'form-control'} %></div>
+  </div>
+  
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <% if @person.errors.any? %>
+    <% @person.errors.full_messages.each do |message| %>
+        <% if message=~ /Name.*/ %>
+        <p style="color:red;"><%= message %></p>
+        <% end %>
+    <% end %>
+    <% end %>
+  </div>
+  
+  <div class="control-group">
+    <%= f.label :qualification, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :qualification, :class => 'form-control' %>
+    </div>
+  </div>
+  
+  <div class="field">
+    <%= label_tag :skills %><br>
+    <div id="skill_list">
+     <%= render partial: "skill_list" %>
+  </div>
+  </div>
+  <br />
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            people_path, :class => 'btn btn-default' %>
+<% end %>

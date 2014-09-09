@@ -1,0 +1,34 @@
+<div style="width:50%;">
+<%- model_class = Group -%>
+<div class="page-header">
+<div style="position:relative;margin-left:15%;">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @group.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @group.description %></dd>
+  <dt><strong>Belongs to:</strong></dt>
+  <dd><b>ORG :</b>&nbsp;<%= @group.organization.name %></dd>
+  <dt><strong>People :</strong></dt>
+  <dd><% @group.people.each do |person| %>
+         <%= person.name %><br />
+      <% end %>
+  </dd>
+</dl>
+<div style="position:relative;margin-left:15%;">
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              groups_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_group_path(@group), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              group_path(@group),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+
+</div>
+</div>

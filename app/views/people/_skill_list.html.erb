@@ -1,0 +1,19 @@
+<% if !@prn.nil? %>
+<%= select_tag :skillid, options_from_collection_for_select(@skills, "id", "name", @prn.skills.map {|s| s.id}), multiple: true, :class => 'form-control' %>
+<% else %>
+<%= select_tag :skillid, options_from_collection_for_select(@skills, "id", "name"), multiple: true, :class => 'form-control' %>
+<% end %>
+<script>
+  $(function(){
+    $("#person_group_id").change(function(){
+       var value=$(this).val();
+       $.ajax({
+        url: "/skill_list?groupid="+value,
+        type: "POST",
+        success: function(data) {
+        $("#skill_list").html(data);
+		}
+        });
+    });
+  });
+  </script>

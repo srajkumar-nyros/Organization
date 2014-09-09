@@ -1,0 +1,41 @@
+<%- model_class = Skill -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+<script>
+$(function(){
+  $(".btn1").css({'background':'#F8F8F8','box-shadow':'0px 0px 10px #d8d8d8','padding':'2px 4px','color':'#333'});$(".btn-danger").css({'color':'white'});
+});
+</script>
+  <tbody>
+    <% @skills.each do |skill| %>
+      <tr>
+        <td><%= link_to skill.name, skill_path(skill), :class => 'btn btn1', :onmouseover => "$(this).css({'background':'#F8F8F8','box-shadow':'0px 0px 10px #666666','padding':'2px 4px','color':'#333'});", :onmouseleave => "$(this).css({'box-shadow':'0px 0px 10px #d8d8d8'});" %></td>
+        <td><%= skill.description %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_skill_path(skill), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      skill_path(skill),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_skill_path,
+            :class => 'btn btn-primary' %>
