@@ -1,6 +1,7 @@
 require 'omniauth-twitter'
 require 'omniauth-facebook'
 require 'omniauth-google-oauth2'
+require 'omniauth-linkedin'
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
@@ -18,6 +19,7 @@ Devise.setup do |config|
   config.omniauth :google_oauth2, "1032606792873-8j3lmc8r1v2j80k7j8m3772nekg9fucj.apps.googleusercontent.com", "oamNT6aHLh1Usav4EDxc4HEB", { access_type: "offline", approval_prompt: "" } 
   config.omniauth :facebook, "846807402004812", "0aa2eefb2ad3c75ec5319aa1e88cc423"
   config.omniauth :twitter, "mU1sbQc9MqmeuHSbqv2u2jw49", "Ywk5te1nBqhHE6IIGjCDvMZist9CC8x2j0xQvhiovF1NY3bu1u"
+  config.omniauth :linkedin, "75msr82zhrgvo2", "65UB2vwLWFzXqM5J", {:scope => 'r_fullprofile r_emailaddress r_network'}
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 

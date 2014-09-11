@@ -9,8 +9,6 @@ class Admin < ActiveRecord::Base
     where(auth.slice(:provider, :adminid)).first_or_create do |admin|
       admin.provider = auth.provider
       admin.adminid = auth.uid
-      puts "\n--------------------------------------------\n"
-      puts auth.uid
       if auth.provider != "twitter"
 	      admin.email = auth.info.email unless auth.info.email.nil?
       else
