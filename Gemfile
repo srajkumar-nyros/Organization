@@ -54,3 +54,5 @@ gem 'omniauth'
 gem 'omniauth-twitter' 
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+gem 'rails_12factor', group: :production
+gem 'pg', group: :production
