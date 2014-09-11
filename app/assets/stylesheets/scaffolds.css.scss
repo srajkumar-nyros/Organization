@@ -23,9 +23,11 @@ a {
   &:visited {
     color: #666;
   }
-  &:hover {
+  & img.ico:hover {
     color: #fff;
-    background-color: #000;
+    border:1px solid grey;
+    border-radius:5px;
+    box-shadow:0px 0px 10px grey;    
   }
 }
 

@@ -11,17 +11,7 @@ module Project
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    config.action_mailer.default_url_options = { host: 'org-project.herokuapp.com' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings ={
-	:address	      => "smtp.gmail.com",
-	:port		      => "587",
-	:domain               => "gmail.com",
-    	:user_name            => "srajkumar.nyros@gmail.com",
-    	:password             => "ks93k2klW",
-    	:authentication       => "plain",
-    	:enable_starttls_auto => true
-    }
+    
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'

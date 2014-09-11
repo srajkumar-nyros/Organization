@@ -19,7 +19,9 @@
 <% end -%>
 
 <%- if devise_mapping.omniauthable? %>
+   
+   <br/><b>Sign in with:</b><br />
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{ !(provider.to_s.titleize=~ /.oogle.*/)? provider.to_s.titleize : "Google" }", omniauth_authorize_path(resource_name, provider) %><br />
+    <%= link_to image_tag( (!(provider.to_s.titleize=~ /.oogle.*/)? provider.to_s.titleize : "Google" )+".png", style: "max-width:50px;max-height:40px;", :class => "ico" ), omniauth_authorize_path(resource_name, provider) %>
   <% end -%>
 <% end -%>
