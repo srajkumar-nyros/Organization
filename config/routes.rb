@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+ 
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+  #devise_for :admins, :controllers => { :omniauth_callbacks => "admins/omniauth_callbacks" }
   resources :people
 
   resources :skills
