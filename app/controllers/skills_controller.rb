@@ -4,7 +4,7 @@ class SkillsController < ApplicationController
   # GET /skills
   # GET /skills.json
   def index
-    @skills = Skill.all
+    @skills = Skill.where( :user_id =>current_user.id)
   end
 
   # GET /skills/1
@@ -14,7 +14,13 @@ class SkillsController < ApplicationController
 
   # GET /skills/new
   def new
-    @sgroups=Organization.first.groups
+     org=Organization.where( :user_id =>current_user.id)
+		if org.nil?
+		@sgroups=org.first.groups
+		else
+		@sgroups=Group.where( :user_id =>current_user.id)
+        end
+     
     @skill = Skill.new
   end
 
@@ -33,12 +39,18 @@ class SkillsController < ApplicationController
   # POST /skills.json
   def create
     @skill = Skill.new(skill_params)
+    @skill.user_id= current_user.id 
     respond_to do |format|
       if @skill.save
         format.html { redirect_to @skill }
         format.json { render :show, status: :created, location: @skill }
       else
-        @sgroups=Organization.first.groups
+         org=Organization.where( :user_id =>current_user.id)
+		if org.nil?
+		@sgroups=org.first.groups
+		else
+		@sgroups=Group.where( :user_id =>current_user.id)
+        end
         format.html { render :new }
         format.json { render json: @skill.errors, status: :unprocessable_entity }
       end

@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.where( :user_id =>current_user.id)
   end
 
   # GET /groups/1
@@ -25,7 +25,7 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-   
+    @group.user_id= current_user.id 
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group }

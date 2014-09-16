@@ -3,10 +3,14 @@
   <div class="field">
     <%= label_tag :organization %><br>
     <% if !@prn.nil? %>
-    <%= select_tag :orgid, options_from_collection_for_select(Organization.all, "id", "name", @prn.group.organization.id), :class => 'form-control' %>
+    <%= select_tag :orgid, options_from_collection_for_select(Organization.where( :user_id =>current_user.id), "id", "name", @prn.group.organization.id), :class => 'form-control' %>
     <% else %>
-    <%= select_tag :orgid, options_from_collection_for_select(Organization.all, "id", "name"), :class => 'form-control' %>
+    <%= select_tag :orgid, options_from_collection_for_select(Organization.where( :user_id =>current_user.id), "id", "name"), :class => 'form-control' %>
+    <% if !(Organization.where( :user_id =>current_user.id)).exists? %>
+    <p style="color:red;"><%= "Please create organiztion" %></p>
     <% end %>
+    <% end %>
+    
   </div>
   <script>
   $(function(){
@@ -34,6 +38,9 @@
     <%= f.label :group %><br>
     <div id="group_list">
     <%= f.collection_select :group_id, @groups, :id, :name, {}, {:class => 'form-control'} %></div>
+    <% if !(Organization.where( :user_id =>current_user.id)).exists?||!(Group.where( :user_id =>current_user.id)).exists? %>
+    <p style="color:red;"><%= "Please create Group" %></p>
+    <% end %>
   </div>
   
   <div class="control-group">

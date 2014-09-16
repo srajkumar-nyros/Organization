@@ -2,9 +2,12 @@
   <div class="field">
     <%= label_tag :organization %><br>
     <% if !@skil.nil? %>
-    <%= select_tag :orgid, options_from_collection_for_select(Organization.all, "id", "name", @skil.group.organization.id), :class => "form-control" %>
+    <%= select_tag :orgid, options_from_collection_for_select(Organization.where( :user_id =>current_user.id), "id", "name", @skil.group.organization.id), :class => "form-control" %>
     <% else %>
-    <%= select_tag :orgid, options_from_collection_for_select(Organization.all, "id", "name"), :class => "form-control" %>
+    <%= select_tag :orgid, options_from_collection_for_select(Organization.where( :user_id =>current_user.id), "id", "name"), :class => "form-control" %>
+    <% end %>
+    <% if !(Organization.where( :user_id =>current_user.id)).exists? %>
+    <p style="color:red;"><%= "Please create organiztion" %></p>
     <% end %>
   </div>
   <script>
@@ -24,8 +27,12 @@
   <div class="field">
     <%= f.label :group %><br>
     <div id="group_list">
-    <%= f.collection_select :group_id, @sgroups, :id, :name, {}, {:class => "form-control"} %></div>
-  </div>
+    <%= f.collection_select :group_id, @sgroups, :id, :name, {}, {:class => "form-control"} %>
+    <% if !(Organization.where( :user_id =>current_user.id)).exists?||!(Group.where( :user_id =>current_user.id)).exists? %>
+    <p style="color:red;"><%= "Please create Group" %></p>
+    <% end %>
+    </div>
+    </div>
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">

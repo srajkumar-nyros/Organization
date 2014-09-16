@@ -2,7 +2,10 @@
 
   <div class="field">
     <%= f.label :organization %><br>
-    <%= f.collection_select :organization_id, Organization.all, :id, :name,{},{:class => 'form-control'} %>
+    <%= f.collection_select :organization_id, Organization.where( :user_id =>current_user.id), :id, :name,{},{:class => 'form-control'} %>
+    <% if !(Organization.where( :user_id =>current_user.id)).exists? %>
+    <p style="color:red;"><%= "Please create organiztion" %></p>
+    <% end %>
   </div>
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>

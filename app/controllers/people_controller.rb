@@ -4,7 +4,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
+    @people = Person.where( :user_id =>current_user.id)
   end
 
   # GET /people/1
@@ -14,8 +14,15 @@ class PeopleController < ApplicationController
 
   # GET /people/new
   def new
-    @groups=Organization.first.groups
+    org=Organization.where( :user_id =>current_user.id)
+    if org.nil?
+    @groups=org.first.groups
     @skills=@groups.first.skills
+    else
+    @groups=Group.where( :user_id =>current_user.id)
+    @skills=Skill.where( :user_id =>current_user.id)
+    end
+    
     @person = Person.new
   end
 
@@ -40,6 +47,7 @@ class PeopleController < ApplicationController
   # POST /people.json
   def create
     @person = Person.new(person_params)
+    @person.user_id= current_user.id 
     respond_to do |format|
       if @person.save
         if params[:skillid]!=nil
@@ -50,8 +58,14 @@ class PeopleController < ApplicationController
         format.html { redirect_to @person }
         format.json { render :show, status: :created, location: @person }
       else
-        @groups=Organization.first.groups
-        @skills=@groups.first.skills
+        org=Organization.where( :user_id =>current_user.id)
+		if org.nil?
+		@groups=org.first.groups
+		@skills=@groups.first.skills
+		else
+		@groups=Group.where( :user_id =>current_user.id)
+		@skills=Skill.where( :user_id =>current_user.id)
+        end
         format.html { render :new }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end

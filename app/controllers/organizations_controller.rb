@@ -4,11 +4,11 @@ class OrganizationsController < ApplicationController
   # GET /organizations
   # GET /organizations.json
   def index
-    @organizations = Organization.all
+    @organizations = Organization.where( :user_id =>current_user.id)
   end
   
   def home
-    @organizations = Organization.all
+    
   end
   
   # GET /organizations/1
@@ -29,7 +29,7 @@ class OrganizationsController < ApplicationController
   # POST /organizations.json
   def create
     @organization = Organization.new(organization_params)
-
+    @organization.user_id= current_user.id 
     respond_to do |format|
       if @organization.save
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
