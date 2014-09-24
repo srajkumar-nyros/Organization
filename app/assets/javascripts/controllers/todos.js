@@ -1,0 +1,100 @@
+function TodosCtrl($scope, $location, Todos, Todo) {
+    "use strict";
+    $scope.todos = Todos.index();
+    $scope.remove = function(id) {
+        var title = 'Delete Todo?', msg = 'Are you sure you want to delete this todo?', btns = [{
+            result : 'cancel',
+            label : 'Cancel'
+        }, {
+            result : 'ok',
+            label : 'OK',
+            cssClass : 'btn-primary'
+        }];
+
+             var result1 =  confirm(msg);
+                if (result1 === true ) {
+                Todo.destroy({
+                    todo_id : id
+                }, function() {
+                    $location.path('/todos');
+                });
+            }
+
+        $scope.todos = Todos.index();
+    };
+    
+    $scope.convertBoolean = function(val) {
+        return val ? 'Yes' : 'No';
+    };
+}
+
+function TodoShowCtrl($scope, $location, $routeParams, Todo) {"use strict";
+    $scope.mytodo_id = "show"
+    $scope.todo = Todo.show({
+        todo_id : $routeParams.todo_id
+    });
+
+		$scope.remove = function(id) {
+        var title = 'Delete Todo?', msg = 'Are you sure you want to delete this todo?', btns = [{
+            result : 'cancel',
+            label : 'Cancel'
+        }, {
+            result : 'ok',
+            label : 'OK',
+            cssClass : 'btn-primary'
+        }];
+
+			 var result1 =	confirm(msg);
+				if (result1 === true ) {
+                Todo.destroy({
+                    todo_id : id
+                }, function() {
+                    $location.path('/todos');
+                });
+            }
+
+        
+    };
+    
+    $scope.convertBoolean = function(val) {
+        return val ? 'Yes' : 'No';
+    };
+
+
+}
+
+function TodoAddCtrl($scope, $location, Todos, Todo) {
+    "use strict";
+    $scope.todo = {};
+    $scope.create = function(todo) {
+				//alert("success");
+        var todoService = new Todos(todo);
+				//alert("success1");
+        todoService.$create(function(todo) {
+						//alert("success2");
+						$location.path('/todos');
+        });
+    }
+}
+
+function TodoEditCtrl($scope, $routeParams, $location, Todo) {
+    "use strict";
+    
+    $scope.master = {};
+    var todo_id = $routeParams.todo_id;
+    $scope.todo = Todo.show({
+        todo_id : todo_id
+    }, function(resource) {
+        $scope.master = angular.copy(resource);
+    });
+
+    $scope.update = function(todo) {
+        todo.$update({
+            todo_id : todo_id
+        }, function(updatedTodo) {
+            $location.path('/Todos/' + updatedTodo.id);
+        });
+    }
+}
+
+

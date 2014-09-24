@@ -1,0 +1,26 @@
+<div class="page-header">
+<div class="page-header">
+<h1>To-dos</h1>
+</div>
+<div>
+	<h3><b>Task:</b> <em>"{{todo.task}}"</em></h3>
+	<h3><b>Description:</b> <em><pre style="border:0px;background-color:white;font-size:20px;">{{todo.description}}</pre></em></h3>
+</div></div>
+<a class='btn btn-default' href="#/todos/{{todo.id}}/edit" >Edit</a>
+<a href="#/todos" class='btn btn-default' style="margin-left:2%;">Back</a>
+<br />
+
+<h2>Comments</h2>
+<form name="addCommentForm" ng-controller="CommentAddCtrl">
+	<fieldset>
+		<input type="hidden" name="comment[todo_id]" id="comment_todo_id" value="{{todo.id}}">
+		<textarea name='comment' class="input-xxlarge form-control" ng-model='comment.comment'required placeholder="Comment here... " style="height:115px;width:50%;"/><br/>
+		<button type="submit" class="btn btn-primary" ng-click="create(comment)" ng-disabled="addCommentForm.$invalid">Submit</button>
+	</fieldset>
+</form><br/>
+<div ng-controller="CommentsCtrl">
+<div style="width:60%;">
+<h3>... Previous Comments ...</h3>
+<pre style="border:0px;" data-ng-repeat = "comment in comments">{{comment.comment}}</pre>
+</div>
+</div>

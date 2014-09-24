@@ -1,0 +1,27 @@
+<div style="width:50%;">
+<div class="page-header">
+<h1>Add a Todo</h1>
+</div>
+
+<form name="addTodoForm">
+	<div class="field">
+	<label>Task</label>
+	<div id="group_list">
+	<input name="todotask" type="text" placeholder="Type the Todo Task..." ng-model="todo.task" blacklist="prasad,satya,veeru" required class='form-control' /></div>
+	<span class="help-inline" ng-show="addTodoForm.todotask.$error.blacklist">
+          The task "{{todo.task}}" is already exisited </span>
+	<span ng-show="addTodoForm.todotask.$error.required" class="help-inline">Required</span></div>
+	<div class="field">
+	<label>Description</label>
+	<div id="group_list">
+	<textarea class="input-xxlarge form-control" ng-model='todo.description' class="help-inline" required placeholder="Add task Description here... " style="height:115px;"/></div></div>
+	<button type="submit" class="btn btn-primary" ng-click="create(todo)" ng-disabled="addTodoForm.$invalid">Submit</button><a href="#/todos" class='btn btn-default' style="margin-left:2%;">Cancel</a>
+</form>
+
+</div>
+
+<style>
+	.help-inline{
+		color: red;	
+	}
+</style>

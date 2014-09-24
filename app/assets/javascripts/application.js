@@ -12,6 +12,22 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require angular
+//= require angular-resource
 //= require twitter/bootstrap
-//= require turbolinks
 //= require_tree .
+
+
+
+angular.module('TodoCommentRails', ['todosService', 'commentsService',])
+  .config(['$httpProvider', function(provider){
+    provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+  }])
+  .config(['$routeProvider', function(router){
+    router
+      .when('/todos', {templateUrl:'/todo/index.html', controller:TodosCtrl})
+      .when('/todos/add', {templateUrl:'/todo/add.html', controller: TodoAddCtrl})
+      .when('/todos/:todo_id', {templateUrl:'/todo/show.html', controller:TodoShowCtrl})
+      .when('/todos/:todo_id/edit', {templateUrl:'/todo/edit.html', controller: TodoEditCtrl})
+      .otherwise({redirectTo: '/todos'});
+}]);
