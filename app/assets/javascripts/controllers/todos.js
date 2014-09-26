@@ -28,6 +28,7 @@ function TodosCtrl($scope, $location, Todos, Todo) {
     };
 }
 
+
 function TodoShowCtrl($scope, $location, $routeParams, Todo) {"use strict";
     $scope.mytodo_id = "show"
     $scope.todo = Todo.show({
