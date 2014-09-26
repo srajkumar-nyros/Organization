@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20140925105617) do
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
   create_table "comments", force: true do |t|
-    t.integer  "todos_id"
+    t.integer  "todo_id"
     t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
