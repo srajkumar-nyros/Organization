@@ -54,7 +54,6 @@ class TodosController < ApplicationController
   # PUT /todos/1.json
   def update
     @todo = Todo.find(params[:id])
-
     respond_to do |format|
       if @todo.update_attributes({:task => params[:task], :description => params[:description]})
         format.html { redirect_to @todo, notice: 'Todo was successfully updated.' }
