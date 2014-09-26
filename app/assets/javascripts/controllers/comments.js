@@ -13,7 +13,6 @@ function CommentShowCtrl($scope, $location, $routeParams, Comment) {"use strict"
     
 }
 
-
 function CommentAddCtrl($scope, $location, Comments, Comment, Todos, Todo, $routeParams, $route) {
     "use strict";
 

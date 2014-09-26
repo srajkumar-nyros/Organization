@@ -12,3 +12,4 @@ angular.module('commentsService', ['ngResource'])
       destroy: { method: 'DELETE' }
     });
   });
+
