@@ -53,7 +53,7 @@ class TodosController < ApplicationController
   # PUT /todos/1
   # PUT /todos/1.json
   def update
-    @todo = Todos.find(params[:id])
+    @todo = Todo.find(params[:id])
 
     respond_to do |format|
       if @todo.update_attributes({:task => params[:task], :description => params[:description]})
@@ -69,7 +69,7 @@ class TodosController < ApplicationController
   # DELETE /todos/1
   # DELETE /todos/1.json
   def destroy
-    @todo = Todos.find(params[:id])
+    @todo = Todo.find(params[:id])
     @todo.destroy
 
     respond_to do |format|
