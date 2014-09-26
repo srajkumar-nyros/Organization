@@ -22,7 +22,10 @@ Rails.application.routes.draw do
   
   post "/s_group_list" => "skills#s_group_list"
 
-  
+  get "/orgns" => "todos#orgns"
+
+  get "/persn" => "todos#persn"
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

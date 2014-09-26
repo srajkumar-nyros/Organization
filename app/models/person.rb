@@ -5,7 +5,7 @@ class Person < ActiveRecord::Base
   belongs_to :group
   belongs_to :user
   has_and_belongs_to_many :skills, dependent: :destroy
-  
+  has_many :todos, dependent: :destroy
   
 
 end

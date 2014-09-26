@@ -98,6 +98,7 @@ class PeopleController < ApplicationController
   # DELETE /people/1.json
   def destroy
     @person.skills.delete_all
+   
     @person.destroy
     respond_to do |format|
       format.html { redirect_to people_url }

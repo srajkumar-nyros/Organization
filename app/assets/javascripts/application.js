@@ -15,11 +15,11 @@
 //= require angular
 //= require angular-resource
 //= require twitter/bootstrap
+//= require turbolinks
 //= require_tree .
 
-
-
 angular.module('TodoCommentRails', ['todosService', 'commentsService',])
+
   .config(['$httpProvider', function(provider){
     provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
   }])
@@ -31,3 +31,6 @@ angular.module('TodoCommentRails', ['todosService', 'commentsService',])
       .when('/todos/:todo_id/edit', {templateUrl:'/todo/edit.html', controller: TodoEditCtrl})
       .otherwise({redirectTo: '/todos'});
 }]);
+$(document).on('ready page:load', function(){
+  angular.bootstrap(document.body, ['TodoCommentRails']);
+});

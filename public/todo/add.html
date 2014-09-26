@@ -5,17 +5,34 @@
 
 <form name="addTodoForm">
 	<div class="field">
+	<label>Organization</label>
+	<div id="group_list">
+	<select data-ng-model="todo.organization_id" data-ng-options="organization.id as organization.name for organization in organizations" name="organization" class='form-control' required data-ng-init="todo.org=organizations[0].id" data-ng-change="change()">
+		<option value=""> --Select Organization--</option>
+	</select>
+	</div>
+	<span data-ng-show="addTodoForm.organization.$error.required" class="help-inline">Required</span></div>
+	<div class="field">
+	<label>Person</label>
+	<div id="group_list">
+	<select data-ng-model="todo.person_id" data-ng-options="person.id as person.name for person in people" name="person" class='form-control' required>
+	<option value=""> --Select Person--</option>
+	</select>
+	</div>
+	<span data-ng-show="addTodoForm.person.$error.required" class="help-inline">Required</span></div>
+	<div class="field">
 	<label>Task</label>
 	<div id="group_list">
-	<input name="todotask" type="text" placeholder="Type the Todo Task..." ng-model="todo.task" blacklist="prasad,satya,veeru" required class='form-control' /></div>
-	<span class="help-inline" ng-show="addTodoForm.todotask.$error.blacklist">
+	<input name="todotask" type="text" placeholder="Type the Todo Task..." data-ng-model="todo.task" blacklist="prasad,satya,veeru" required class='form-control' /></div>
+	<span class="help-inline" data-ng-show="addTodoForm.todotask.$error.blacklist">
           The task "{{todo.task}}" is already exisited </span>
-	<span ng-show="addTodoForm.todotask.$error.required" class="help-inline">Required</span></div>
+	<span data-ng-show="addTodoForm.todotask.$error.required" class="help-inline">Required</span></div>
 	<div class="field">
 	<label>Description</label>
 	<div id="group_list">
-	<textarea class="input-xxlarge form-control" ng-model='todo.description' class="help-inline" required placeholder="Add task Description here... " style="height:115px;"/></div></div>
-	<button type="submit" class="btn btn-primary" ng-click="create(todo)" ng-disabled="addTodoForm.$invalid">Submit</button><a href="#/todos" class='btn btn-default' style="margin-left:2%;">Cancel</a>
+	<textarea class="input-xxlarge form-control" data-ng-model='todo.description' class="help-inline" name='description' required placeholder="Add task Description here... " style="height:115px;"/></div>
+	<span data-ng-show="addTodoForm.description.$error.required" class="help-inline">Required</span></div>
+	<button type="submit" class="btn btn-primary" data-ng-click="create(todo)" data-ng-disabled="addTodoForm.$invalid">Submit</button><a href="#/todos" class='btn btn-default' style="margin-left:2%;">Cancel</a>
 </form>
 
 </div>

@@ -1,3 +1,3 @@
 class Comment < ActiveRecord::Base
-	belongs_to :todos
+	belongs_to :todo
 end

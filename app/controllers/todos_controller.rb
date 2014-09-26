@@ -3,7 +3,7 @@ class TodosController < ApplicationController
   # GET /todos.json
   respond_to :json, :html
   def index
-  	@todos = Todos.where( :user_id =>current_user.id)
+  	@todos = Todo.where( :user_id =>current_user.id)
     respond_with(@todos)
   end
   
@@ -11,17 +11,35 @@ class TodosController < ApplicationController
   # GET /todos/1
   # GET /todos/1.json
   def show
-    @todo = Todos.find(params[:id])
+    @todo = Todo.find(params[:id])
     respond_with(@todo)
   end 
-  
+
+  # GET /todos
+  # GET /todos.json
+  def orgns
+    @organizations = Organization.where( :user_id =>current_user.id)
+    respond_with(@organizations)
+  end 
  
+  # POST /todos
+  # POST /todos.json
+  def persn
+  	groups= Group.where(:organization_id => params[:organization_id])
+  	@grps=[]
+  	groups.each do |group|
+  		@grps << group.id
+  	end
+    @people = Person.where(:group_id => @grps)
+    respond_with(@people)
+  end 
+
   # todo /todos
   # todo /todos.json
   def create
-		@todo_find = Todos.find_by_task(params[:task])
+		@todo_find = Todo.find_by_task(params[:task])
 		if @todo_find.nil?
-	    @todo = Todos.new({:task => params[:task], :description => params[:description], :user_id => current_user.id })
+	    @todo = Todo.new({:task => params[:task], :description => params[:description], :user_id => current_user.id, :organization_id => params[:organization_id], :person_id => params[:person_id] })
   	  @todo.save
   	  respond_with(@todo)
 		else

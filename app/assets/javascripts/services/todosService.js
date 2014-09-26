@@ -5,6 +5,16 @@ angular.module('todosService', ['ngResource'])
       create: { method: 'POST' }
     });
   })
+  .factory('Organizations', function($resource) {
+    return $resource('orgns.json', {}, { 
+      orgns: { method: 'GET', isArray: true}
+    });
+  })
+  .factory('People', function($resource) {
+    return $resource('persn.json', {}, { 
+      persn: { method: 'GET', isArray: true}
+    });
+  })
   .factory('Todo', function($resource){
     return $resource('todos/:todo_id.json', {}, {
       show: { method: 'GET' },

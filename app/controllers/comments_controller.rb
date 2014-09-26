@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   # GET /comments.json
   respond_to :json, :html
   def index
-    todo = Todos.find(params[:id])
+    todo = Todo.find(params[:id])
     respond_with(@comments = todo.comments)
   end
 
@@ -20,9 +20,9 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new()
     @comment.comment = params[:comment]
-    @comment.todos_id = params[:todo_id]
+    @comment.todo_id = params[:todo_id]
     @comment.save
-    todo = Todos.find(@comment.todos_id)
+    todo = Todo.find(@comment.todo_id)
 		@comments = todo.comments.all
     respond_with(todo)
   end

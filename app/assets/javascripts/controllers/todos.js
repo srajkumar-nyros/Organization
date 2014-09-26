@@ -63,9 +63,16 @@ function TodoShowCtrl($scope, $location, $routeParams, Todo) {"use strict";
 
 }
 
-function TodoAddCtrl($scope, $location, Todos, Todo) {
+function TodoAddCtrl($scope, $location, Todos, Todo, Organizations, People) {
     "use strict";
     $scope.todo = {};
+    $scope.organizations = Organizations.orgns();
+    $scope.change = function() {
+        $scope.people = People.persn({
+                organization_id : $scope.todo.organization_id
+        });
+        
+    }
     $scope.create = function(todo) {
 				//alert("success");
         var todoService = new Todos(todo);
