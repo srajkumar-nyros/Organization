@@ -3,7 +3,6 @@ class CreateComments < ActiveRecord::Migration
     create_table :comments do |t|
       t.integer :todos_id
       t.text :comment
-
       t.timestamps
     end
   end
