@@ -15,6 +15,11 @@ angular.module('todosService', ['ngResource'])
       persn: { method: 'GET', isArray: true}
     });
   })
+  .factory('Pple', function($resource) {
+    return $resource('pple.json', {}, { 
+      pple: { method: 'GET', isArray: true}
+    });
+  })
   .factory('Todo', function($resource){
     return $resource('todos/:todo_id.json', {}, {
       show: { method: 'GET' },

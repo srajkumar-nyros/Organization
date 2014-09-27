@@ -84,16 +84,29 @@ function TodoAddCtrl($scope, $location, Todos, Todo, Organizations, People) {
     }
 }
 
-function TodoEditCtrl($scope, $routeParams, $location, Todo) {
+function TodoEditCtrl($scope, $routeParams, $location, Todo, Organizations, People, Pple) {
     "use strict";
     
     $scope.master = {};
     var todo_id = $routeParams.todo_id;
+
+    $scope.organizations = Organizations.orgns();
+    $scope.pple = Pple.pple({
+        todo_id : todo_id
+    });
+    $scope.change = function() {
+        $scope.todo.person_id= null;
+        $scope.pple = People.persn({
+                organization_id : $scope.todo.organization_id
+        });
+        
+    }
     $scope.todo = Todo.show({
         todo_id : todo_id
     }, function(resource) {
         $scope.master = angular.copy(resource);
     });
+   
 
     $scope.update = function(todo) {
         todo.$update({

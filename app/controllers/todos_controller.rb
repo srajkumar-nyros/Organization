@@ -22,8 +22,8 @@ class TodosController < ApplicationController
     respond_with(@organizations)
   end 
  
-  # POST /todos
-  # POST /todos.json
+  # GET /todos
+  # GET /todos.json
   def persn
   	groups= Group.where(:organization_id => params[:organization_id])
   	@grps=[]
@@ -33,6 +33,20 @@ class TodosController < ApplicationController
     @people = Person.where(:group_id => @grps)
     respond_with(@people)
   end 
+
+  # GET /todos
+  # GET /todos.json
+  def pple
+  	org= Todo.where(:id => params[:todo_id]).first
+  	groups= Group.where(:organization_id => org.organization_id)
+  	@grps=[]
+  	groups.each do |group|
+  		@grps << group.id
+  	end
+    @people = Person.where(:group_id => @grps)
+    respond_with(@people)
+  end 
+
 
   # todo /todos
   # todo /todos.json
@@ -55,7 +69,7 @@ class TodosController < ApplicationController
   def update
     @todo = Todo.find(params[:id])
     respond_to do |format|
-      if @todo.update_attributes({:task => params[:task], :description => params[:description]})
+      if @todo.update_attributes({:task => params[:task], :description => params[:description], :organization_id => params[:organization_id], :person_id => params[:person_id] })
         format.html { redirect_to @todo, notice: 'Todo was successfully updated.' }
         format.json { head :no_content }
       else
