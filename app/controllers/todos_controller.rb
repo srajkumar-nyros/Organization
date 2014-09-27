@@ -69,7 +69,10 @@ class TodosController < ApplicationController
   def update
     @todo = Todo.find(params[:id])
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 362e2193849f340f2d92f630b377cf098816b7f1
 
 >>>>>>> 362e2193849f340f2d92f630b377cf098816b7f1
     respond_to do |format|

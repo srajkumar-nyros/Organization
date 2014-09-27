@@ -101,7 +101,6 @@ function TodoEditCtrl($scope, $routeParams, $location, Todo, Organizations, Peop
         });
         
     }
-    
     $scope.todo = Todo.show({
         todo_id : todo_id
     }, function(resource) {
