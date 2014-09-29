@@ -20,7 +20,7 @@
   <dt><strong>To-dos:</strong></dt>
   <dd><table>
   <% @person.todos.each do |todo| %>
-  <tr><td><b><%= "task :" %></b><%= "#{todo.task}" %></td><td> <b><%= "description :" %> </b><%= "#{todo.description}" %></td></tr>
+  <tr><td><b><%= "task :" %></b><%= "#{todo.task}" %></td><td>&nbsp;&nbsp;&nbsp;</td><td><b><%= "description :" %> </b><%= "#{todo.description}" %></td></tr>
   <% end %></table>
   </dd>
 </dl>
