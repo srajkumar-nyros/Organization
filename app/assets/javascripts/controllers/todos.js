@@ -95,6 +95,7 @@ function TodoEditCtrl($scope, $routeParams, $location, Todo, Organizations, Peop
     }, function(resource) {
         $scope.master = angular.copy(resource);
     });
+    
 
     $scope.organizations = Organizations.orgns();
     $scope.pple = Pple.pple({
