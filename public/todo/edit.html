@@ -6,7 +6,7 @@
 <form name="editTodoForm">
 	<div class="field">
 	<label>Organization</label>
-	<div id="group_list">{{todo.organization_id}}
+	<div id="group_list">
 	<select data-ng-model="todo.organization_id" data-ng-options="organization.id as organization.name for organization in organizations" name="organization" class='form-control' required data-ng-init="todo.org=organizations[0].id" data-ng-change="change()">
 		<option value=""> --Select Organization--</option>
 	</select>
@@ -14,7 +14,7 @@
 	<span data-ng-show="editTodoForm.organization.$error.required" class="help-inline">Required</span></div>
 	<div class="field">
 	<label>Person</label>
-	<div id="group_list">{{todo.person_id}}
+	<div id="group_list">
 	<select data-ng-model="todo.person_id" data-ng-options="person.id as person.name for person in pple" name="person" class='form-control' required>
 	<option value=""> --Select Person--</option>
 	</select>
