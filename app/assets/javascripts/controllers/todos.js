@@ -89,14 +89,11 @@ function TodoEditCtrl($scope, $routeParams, $location, Todo, Organizations, Peop
     
     $scope.master = {};
     var todo_id = $routeParams.todo_id;
-alert("1");
     $scope.todo = Todo.show({
         todo_id : todo_id
     }, function(resource) {
-        alert("2");
         $scope.master = angular.copy(resource);
         $scope.organizations = Organizations.orgns();
-        alert("3");
         $scope.pple = Pple.pple({
             todo_id : todo_id
         });
