@@ -103,6 +103,7 @@ function TodoEditCtrl($scope, $routeParams, $location, Todo, Organizations, Peop
         todo_id : todo_id
     });
     console.log($scope.pple);
+    console.log("sadfasdf");
     $scope.change = function() {
         $scope.todo.person_id= null;
         $scope.pple = People.persn({
