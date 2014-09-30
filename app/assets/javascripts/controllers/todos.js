@@ -95,6 +95,7 @@ function TodoEditCtrl($scope, $routeParams, $location, Todo, Organizations, Peop
     }, function(resource) {
         $scope.master = angular.copy(resource);
         $scope.organizations = Organizations.orgns();
+        alert("zsdf");
         $scope.pple = Pple.pple({
             todo_id : todo_id
         });
