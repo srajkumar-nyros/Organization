@@ -96,24 +96,26 @@ function TodoEditCtrl($scope, $routeParams, $location, Todo, Organizations, Peop
         $scope.master = angular.copy(resource);
     });
     
-    $scope.update = function(todo) {
-        todo.$update({
+    $scope.check = function() {
+        $scope.organizations = Organizations.orgns();
+        $scope.pple = Pple.pple({
             todo_id : todo_id
-        }, function(updatedTodo) {
-            $location.path('/Todos/' + updatedTodo.id);
         });
     }
-
-    $scope.organizations = Organizations.orgns();
-    $scope.pple = Pple.pple({
-        todo_id : todo_id
-    });
     $scope.change = function() {
         $scope.todo.person_id= null;
         $scope.pple = People.persn({
                 organization_id : $scope.todo.organization_id
         });
         
+    }
+
+    $scope.update = function(todo) {
+        todo.$update({
+            todo_id : todo_id
+        }, function(updatedTodo) {
+            $location.path('/Todos/' + updatedTodo.id);
+        });
     }
 
 }
