@@ -96,6 +96,13 @@ function TodoEditCtrl($scope, $routeParams, $location, Todo, Organizations, Peop
         $scope.master = angular.copy(resource);
     });
     
+    $scope.update = function(todo) {
+        todo.$update({
+            todo_id : todo_id
+        }, function(updatedTodo) {
+            $location.path('/Todos/' + updatedTodo.id);
+        });
+    }
 
     $scope.organizations = Organizations.orgns();
     $scope.pple = Pple.pple({
@@ -109,13 +116,6 @@ function TodoEditCtrl($scope, $routeParams, $location, Todo, Organizations, Peop
         
     }
 
-    $scope.update = function(todo) {
-        todo.$update({
-            todo_id : todo_id
-        }, function(updatedTodo) {
-            $location.path('/Todos/' + updatedTodo.id);
-        });
-    }
 }
 
 
